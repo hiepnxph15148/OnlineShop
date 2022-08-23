@@ -58,6 +58,9 @@
       <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.SqlServer.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="HtmlAgilityPack.NetCore, Version=1.5.0.1, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\HtmlAgilityPack.NetCore.1.5.0.1\lib\net45\HtmlAgilityPack.NetCore.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="PagedList, Version=1.17.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
       <HintPath>..\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
@@ -412,6 +415,11 @@
     <Content Include="Asset\js\pulgins\ckeditor\plugins\wsc\dialogs\tmpFrameset.html" />
     <Content Include="Asset\js\pulgins\ckeditor\plugins\wsc\dialogs\wsc.css" />
     <Content Include="Asset\js\pulgins\ckeditor\plugins\wsc\dialogs\wsc.js" />
+    <Content Include="Asset\js\pulgins\ckeditor\plugins\youtube\images\icon.png" />
+    <Content Include="Asset\js\pulgins\ckeditor\plugins\youtube\lang\en.js" />
+    <Content Include="Asset\js\pulgins\ckeditor\plugins\youtube\lang\ja.js" />
+    <Content Include="Asset\js\pulgins\ckeditor\plugins\youtube\lang\pt.js" />
+    <Content Include="Asset\js\pulgins\ckeditor\plugins\youtube\plugin.js" />
     <Content Include="Asset\js\pulgins\ckeditor\samples\ajax.html" />
     <Content Include="Asset\js\pulgins\ckeditor\samples\api.html" />
     <Content Include="Asset\js\pulgins\ckeditor\samples\appendto.html" />
@@ -479,6 +487,20 @@
     <Content Include="Asset\js\pulgins\ckeditor\samples\sample.css" />
     <Content Include="Asset\js\pulgins\ckeditor\samples\sample.js" />
     <Content Include="Asset\js\pulgins\ckeditor\samples\tabindex.html" />
+    <Content Include="Asset\js\pulgins\ckeditor\samples\toolbarconfigurator\css\fontello.css" />
+    <Content Include="Asset\js\pulgins\ckeditor\samples\toolbarconfigurator\font\fontello.svg" />
+    <Content Include="Asset\js\pulgins\ckeditor\samples\toolbarconfigurator\font\LICENSE.txt" />
+    <Content Include="Asset\js\pulgins\ckeditor\samples\toolbarconfigurator\index.html" />
+    <Content Include="Asset\js\pulgins\ckeditor\samples\toolbarconfigurator\js\abstracttoolbarmodifier.js" />
+    <Content Include="Asset\js\pulgins\ckeditor\samples\toolbarconfigurator\js\fulltoolbareditor.js" />
+    <Content Include="Asset\js\pulgins\ckeditor\samples\toolbarconfigurator\js\toolbarmodifier.js" />
+    <Content Include="Asset\js\pulgins\ckeditor\samples\toolbarconfigurator\js\toolbartextmodifier.js" />
+    <Content Include="Asset\js\pulgins\ckeditor\samples\toolbarconfigurator\lib\codemirror\codemirror.css" />
+    <Content Include="Asset\js\pulgins\ckeditor\samples\toolbarconfigurator\lib\codemirror\codemirror.js" />
+    <Content Include="Asset\js\pulgins\ckeditor\samples\toolbarconfigurator\lib\codemirror\javascript.js" />
+    <Content Include="Asset\js\pulgins\ckeditor\samples\toolbarconfigurator\lib\codemirror\neo.css" />
+    <Content Include="Asset\js\pulgins\ckeditor\samples\toolbarconfigurator\lib\codemirror\show-hint.css" />
+    <Content Include="Asset\js\pulgins\ckeditor\samples\toolbarconfigurator\lib\codemirror\show-hint.js" />
     <Content Include="Asset\js\pulgins\ckeditor\samples\uicolor.html" />
     <Content Include="Asset\js\pulgins\ckeditor\samples\uilanguages.html" />
     <Content Include="Asset\js\pulgins\ckeditor\samples\xhtmlstyle.html" />
@@ -3134,6 +3156,14 @@
     <Content Include="Asset\js\pulgins\ckeditor\samples\old\assets\posteddata.php" />
     <Content Include="Asset\js\pulgins\ckeditor\samples\old\htmlwriter\assets\outputforflash\outputforflash.fla" />
     <Content Include="Asset\js\pulgins\ckeditor\samples\old\sample_posteddata.php" />
+    <Content Include="Asset\js\pulgins\ckeditor\samples\toolbarconfigurator\font\config.json" />
+    <Content Include="Asset\js\pulgins\ckeditor\samples\toolbarconfigurator\font\fontello.eot" />
+    <Content Include="Asset\js\pulgins\ckeditor\samples\toolbarconfigurator\font\fontello.ttf" />
+    <Content Include="Asset\js\pulgins\ckeditor\samples\toolbarconfigurator\font\fontello.woff" />
+    <Content Include="Asset\js\pulgins\ckeditor\samples\toolbarconfigurator\lib\codemirror\LICENSE" />
+    <Content Include="Areas\Admin\Views\Shared\_Navigation.cshtml" />
+    <Content Include="Areas\Admin\Views\Error\Error.cshtml" />
+    <Content Include="Areas\Admin\Views\Error\PageNotFound.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -3156,11 +3186,12 @@
     </Content>
     <Content Include="Views\Web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
-    <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Shared\_Menu.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Code\" />
@@ -3186,13 +3217,13 @@
     <Content Include="Scripts\jquery-3.4.1.min.map" />
   </ItemGroup>
   <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="..\Model\Model.csproj">
       <Project>{87298b65-1f31-42d2-86ee-9fba478c5f2f}</Project>
       <Name>Model</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
