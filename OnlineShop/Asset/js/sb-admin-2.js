@@ -54,3 +54,8 @@
   });
 
 })(jQuery); // End of use strict
+
+$(function () {
+    $("#AlertBox").removeClass('hide');
+    $("#AlertBox").delay(1000).slideUp(500);
+})

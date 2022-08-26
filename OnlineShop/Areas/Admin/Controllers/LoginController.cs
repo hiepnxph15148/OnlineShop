@@ -1,6 +1,7 @@
 ﻿using Model.Dao;
 using OnlineShop.Areas.Admin.Models;
 using OnlineShop.Commom;
+using OnlineShop.Common;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,12 +29,24 @@ namespace OnlineShop.Areas.Admin.Controllers
                     var userSession = new UserLogin();
                     userSession.UserName = user.UserName;
                     userSession.UserID = user.ID;
+                    userSession.GroupID = user.GroupID;
+                    var listCredentials = dao.GetListCredential(model.UserName);
+                    Session.Add(CommomConstants.SESSION_CREDENTIALS, listCredentials);
                     Session.Add(CommomConstants.USER_SESSION,userSession);
                     return RedirectToAction("Index","Home");
                 }
                 else if(result == 0)
                 {
                     ModelState.AddModelError("", "Tài khoản không tồn tại");
+                }
+                else if (result == 2)
+                {
+                    var user = dao.GetById(model.UserName);
+                    var userSession = new UserLogin();
+                    userSession.UserName = user.UserName;
+                    userSession.UserID = user.ID;
+                    Session.Add(CommomConstants.USER_SESSION, userSession);
+                    return RedirectToAction("/", "Home");
                 }
                 else if (result == -1)
                 {
@@ -42,6 +55,10 @@ namespace OnlineShop.Areas.Admin.Controllers
                 else if (result == -2)
                 {
                     ModelState.AddModelError("", "Mật khẩu không đúng");
+                }
+                else if (result == -2)
+                {
+                    ModelState.AddModelError("", "Tài khoản của bạn không có quyền đăng nhập");
                 }
                 else
                 {

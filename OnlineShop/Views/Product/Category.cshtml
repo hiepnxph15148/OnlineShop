@@ -1,0 +1,37 @@
+﻿
+@{
+    ViewBag.Title = "Category";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var category = (Model.EF.ProductCategory)ViewBag.Category2;
+    var relateProducts2 = (List<Model.EF.Product>)ViewBag.RelatedProducts2;
+
+}
+<div class="hihi">
+    <div class="content">
+        @{Html.RenderAction("ProductCategory", "Product");}
+    </div>
+</div>
+<h2 style="text-align:center"><p>@category.Name</p></h2>
+<div class="product-list" style="padding:30px">
+
+    @foreach (var item in relateProducts2)
+    {
+
+        var url = "/chi-tiet/" + item.MetaTitle + "-" + item.ID;
+        <div class="products">
+
+            <a href="@url">
+                <img width="200" src="@item.Image" alt="" />
+            </a>
+            <div class="detail-products">
+                <h4>  @item.Name</h4>
+
+                <div class="card">
+                    <button>Mua Ngay</button>
+                    <button><a href="/them-gio-hang?productId=@item.ID&quantyli=1">Thêm vào giỏ</a></button>
+                </div>
+            </div>
+        </div>
+
+    }
+</div>

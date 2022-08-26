@@ -24,6 +24,9 @@ namespace Model.EF
         [StringLength(250)]
         public string SeoTitle { get; set; }
 
+        [StringLength(500)]
+        public string image { get; set; }
+
         public DateTime? CreatedDate { get; set; }
 
         [StringLength(50)]

@@ -14,7 +14,7 @@ namespace OnlineShop.Areas.Admin.Controllers
         public ActionResult Index(string searchString, int page = 1, int pageSize = 3)
         
         {
-            var dao = new UserDao();
+            var dao = new ContentDao();
             var model = dao.ListAllPagingContent(searchString, page, pageSize);
             ViewBag.SearchString = searchString;
             return View(model);
@@ -22,14 +22,26 @@ namespace OnlineShop.Areas.Admin.Controllers
         [HttpGet]
         public ActionResult Create()
         {
+            SetViewBag();
             return View();
+        }
+        public void SetViewBag()
+        {
+            var dao = new CategoryDao();
+            //ViewBag.CategoriID = new SelectList(dao.ListAll(), "ID", "Name", selectedID);
+            List<SelectListItem> CList = new List<SelectListItem>();
+            foreach (var item in dao.ListAll())
+            {
+                CList.Add(new SelectListItem { Text = item.Name.ToString(), Value = item.Name.ToString() });
+            }
+            ViewBag.CategoriID = CList;
         }
         [HttpPost]
         public ActionResult Create(Content Content)
         {
             if (ModelState.IsValid)
             {
-                var dao = new UserDao();
+                var dao = new ContentDao();
 
                 long id = dao.Insert(Content);
                 if (id > 0)
@@ -42,21 +54,26 @@ namespace OnlineShop.Areas.Admin.Controllers
 
                 }
             }
-            return View("Index");
+            SetViewBag();
+            return View();
 
-        }
+            }
+
+
         public ActionResult Edit(int id)
         {
-            var content = new UserDao().ViewDetailContent(id);
+            var dao = new ContentDao();
+            var content = dao.GetByID(id);
+            SetViewBag();
             return View(content);
         }
         [HttpPost]
-        public ActionResult Edit(Content content)
+        public ActionResult Edit(Content model)
         {
             if (ModelState.IsValid)
             {
-                var dao = new UserDao();
-                bool result = dao.UpdateContent(content);
+                var dao = new ContentDao();
+                bool result = dao.UpdateContent(model);
                 if (result)
                 {
                     return RedirectToAction("Index", "Content");
@@ -67,13 +84,14 @@ namespace OnlineShop.Areas.Admin.Controllers
 
                 }
             }
+            SetViewBag();
             return View("Index");
 
         }
         [HttpDelete]
         public ActionResult Delete(int id)
         {
-            new UserDao().DeleteContent(id);
+            new ContentDao().DeleteContent(id);
             return RedirectToAction("Content");
         }
 

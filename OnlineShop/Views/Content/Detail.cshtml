@@ -1,0 +1,10 @@
+﻿
+@{
+    ViewBag.Title = "Detail";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var content = (Model.EF.Content)ViewBag.ContentDetail;
+}
+
+@content.Detail
+<h1>@content.Name</h1>
+

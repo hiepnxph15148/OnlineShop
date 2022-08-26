@@ -1,31 +1,105 @@
-﻿@{
+﻿@*@model  PagedList.IPagedList<Model.EF.Product>*@
+
+@*@using PagedList.Mvc;*@
+@{
     ViewBag.Title = "Home Page";
+    var listNewProducts = (List<Model.EF.Product>)ViewBag.NewProducts;
+    var listFeatureProduct = (List<Model.EF.Product>)ViewBag.ListFeatureProduct;
+    var listFeatureContent = (List<Model.EF.Content>)ViewBag.ListFeatureContent;
 }
 
-<div class="jumbotron">
-    <h1>ASP.NET</h1>
-    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-    <p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
-</div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="~/Content/Site.css" rel="stylesheet" />
+    <title>Document</title>
 
-<div class="row">
-    <div class="col-md-4">
-        <h2>Getting started</h2>
-        <p>
-            ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-            enables a clean separation of concerns and gives you full control over markup
-            for enjoyable, agile development.
-        </p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
+
+</head>
+<body>
+    <div class="content">
+        @{Html.RenderAction("ProductCategory", "Product");}
     </div>
-    <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
-    </div>
-</div>
+   
+    <div class="container">
+
+        <div class="title" style="display:flex;justify-content:space-between">
+            <h2>Products</h2>
+            <a style="line-height:80px" href="/Product/ShowAll">See all Products</a>
+        </div>
+        <div class="product-list">
+
+            @foreach (var item in listNewProducts)
+            {
+                var url = "/chi-tiet/" + item.MetaTitle + "-" + item.ID;
+                <div class="products">
+
+                    <a href="@url">
+                        <img width="200" src="@item.Image" alt="" />
+                    </a>
+                    <div class="detail-products">
+                        <h4>  @item.Name</h4>
+
+                        <div class="card">
+                            <button>Mua Ngay</button>
+                            <button><a href="/them-gio-hang?productId=@item.ID&quantyli=1">Thêm vào giỏ</a></button>
+                        </div>
+                    </div>
+                </div>
+            }
+
+        </div>
+        <div class="title">
+            <a style="font-size:28px" href="">Top Hot Products</a>
+        </div>
+        <div class="product-list">
+          
+            @foreach (var item in listFeatureProduct)
+            {
+                var url = "/chi-tiet/" + item.MetaTitle + "-" + item.ID;
+                <div class="products">
+                    <a href="@url"><img src="@item.Image" alt="" /></a>
+                    <div class="detail-products">
+                        <h4> @item.Name</h4>
+
+                        <div class="card">
+                            <button>Mua Ngay</button>
+                            <button><a href="/them-gio-hang?productId=@item.ID&quantyli=1">Thêm vào giỏ</a></button>
+                        </div>
+                    </div>
+                </div>
+            }
+
+        </div>
+        <div class="title">
+            <a style="font-size:28px" href="">Top Hot Content</a>
+        </div>
+
+        <div class="product-list">
+          
+            @foreach (var item in listFeatureContent)
+            {
+                var url = "/chi-tiet-content/" + item.MetaTitle + "-" + item.ID;
+                <div class="products">
+                 <a href="@url"><img src="@item.Image" alt="" /></a>
+
+            </div>
+            }
+
+        </div>
+
+
+
+
+    </div><br /><br />
+    @*<div class="page text-center">
+        @Html.PagedListPager(Model, page => Url.Action("Index", new { page, @searchString = ViewBag.@SearchString }))
+    </div>*@
+
+
+</body>
+</html>
+

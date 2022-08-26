@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Model.Dao;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,8 +9,13 @@ namespace OnlineShop.Controllers
 {
     public class HomeController : Controller
     {
-        public ActionResult Index()
+        public ActionResult Index()     
         {
+            var contentDao = new ContentDao();
+            var productDao = new ProductDao();
+            ViewBag.NewProducts = productDao.ListNewProduct(4);
+            ViewBag.ListFeatureProduct = productDao.ListFeatureProduct(4);
+            ViewBag.ListFeatureContent = contentDao.ListFeatureContent(4);
             return View();
         }
 

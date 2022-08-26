@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Common;
 using Model.EF;
 using PagedList;
 namespace Model.Dao
@@ -63,12 +64,81 @@ namespace Model.Dao
         {
             return db.Users.Find(id);
         }
+        public List<string> GetListCredential(string userName)
+        {
+            var user = db.Users.Single(x => x.UserName == userName);
+            var data = (from a in db.Credentials
+                        join b in db.UserGroups on a.UserGroupID equals b.ID
+                        join c in db.Roles on a.RoleID equals c.ID
+                        where b.ID == user.GroupID
+                        select new
+                        {
+                            RoleID = a.RoleID,
+                            UserGroupID = a.UserGroupID
+                        }).AsEnumerable().Select(x => new Credential()
+                        {
+                            RoleID = x.RoleID,
+                            UserGroupID = x.UserGroupID
+                        });
+            return data.Select(x => x.RoleID).ToList();
+
+        }
+        public int Login(string userName, string passWord, bool isLoginAdmin = false)
+        {
+            var result = db.Users.SingleOrDefault(x => x.UserName == userName);
+            if (result == null)
+            {
+                return 0;
+            }
+            else
+            {
+                if (isLoginAdmin == true)
+                {
+                    if (result.GroupID == CommonConstantscs.ADMIN_GROUP || result.GroupID == CommonConstantscs.MOD_GROUP)
+                    {
+                        if (result.Status == false)
+                        {
+                            return -1;
+                        }
+                        else
+                        {
+                            if (result.Password == passWord)
+                                return 1;
+                            else
+                                return -2;
+                        }
+                    }
+                    else
+                    {
+                        return -3;
+                    }
+                }
+                else
+                {
+                    if (result.Status == false)
+                    {
+                        return -1;
+                    }
+                    else
+                    {
+                        if (result.Password == passWord)
+                            return 1;
+                        else
+                            return -2;
+                    }
+                }
+            }
+        }
         public int Login(string userName, string passWord)
         {
             var result = db.Users.SingleOrDefault(x => x.UserName == userName);
             if (result == null)
             {
                 return 0;
+            }
+            else if (result == null)
+            {
+                return 2;
             }
             else
             {
@@ -100,118 +170,21 @@ namespace Model.Dao
             }
             
         }
-        public long Insert(Category entity)
+        public bool ChangeStatus(long id)
         {
-            db.Categories.Add(entity);
+            var user = db.Users.Find(id);
+            user.Status = !user.Status;
             db.SaveChanges();
-            return entity.ID;
+            return (bool)user.Status;
         }
-        public bool Updatecate(Category entity)
+        public bool CheckUserName(string userName)
         {
-            try
-            {
-                var category = db.Categories.Find(entity.ID);
-                category.Name = entity.Name;
-                category.CreatedDate = DateTime.Now;
-                db.SaveChanges();
-                return true;
-            }
-            catch (Exception)
-            {
+            return db.Users.Count(x => x.UserName == userName) > 0;
+        }
+        public bool CheckEmail(string email)
+        {
+            return db.Users.Count(x => x.Email == email) > 0;
+        }
 
-                return false;
-            }
-
-
-        }
-        public IEnumerable<Category> ListAllPagingcate(string searchString, int page, int pageSize)
-        {
-            IQueryable<Category> model = db.Categories;
-            if (!string.IsNullOrEmpty(searchString))
-            {
-                model = model.Where(x => x.Name.Contains(searchString));
-            }
-            return model.OrderByDescending(x => x.CreatedDate).ToPagedList(page, pageSize);
-        }
-        public Category GetByIdcate(string userName)
-        {
-            return db.Categories.SingleOrDefault(x => x.Name == userName);
-        }
-        public Category ViewDetailcate(int id)
-        {
-            return db.Categories.Find(id);
-        }
-        public bool Deletecate(int id)
-        {
-            try
-            {
-                var category = db.Categories.Find(id);
-                db.Categories.Remove(category);
-                db.SaveChanges();
-                return true;
-            }
-            catch (Exception)
-            {
-                return false;
-            }
-
-        }
-        public long Insert(Content entity)
-        {
-            db.Contents.Add(entity);
-            db.SaveChanges();
-            return entity.ID;
-        }
-        public bool DeleteContent(int id)
-        {
-            try
-            {
-                var content = db.Contents.Find(id);
-                db.Contents.Remove(content);
-                db.SaveChanges();
-                return true;
-            }
-            catch (Exception)
-            {
-                return false;
-            }
-
-        }
-        public bool UpdateContent(Content entity)
-        {
-            try
-            {
-                var content = db.Contents.Find(entity.ID);
-                content.Name = entity.Name;
-                content.Image = entity.Image;
-                content.CreatedDate = DateTime.Now;
-                db.SaveChanges();
-                return true;
-            }
-            catch (Exception)
-            {
-
-                return false;
-            }
-
-
-        }
-        public IEnumerable<Content> ListAllPagingContent(string searchString, int page, int pageSize)
-        {
-            IQueryable<Content> model = db.Contents;
-            if (!string.IsNullOrEmpty(searchString))
-            {
-                model = model.Where(x => x.Name.Contains(searchString));
-            }
-            return model.OrderByDescending(x => x.CreatedDate).ToPagedList(page, pageSize);
-        }
-       // public Category GetByIContent(string Name)
-       // {
-         //   return db.Contents.SingleOrDefault(x => x.Name == Name);
-       // }
-        public Content ViewDetailContent(int id)
-        {
-            return db.Contents.Find(id);
-        }
     }
 }

@@ -1,0 +1,69 @@
+﻿@{
+    ViewBag.Title = "Thanh Toan";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var Cart = (List<OnlineShop.Models.CartItem>)ViewBag.Cart;
+
+
+
+
+}
+<table class="table">
+    <thead>
+        <tr>
+            <td>Mã SP</td>
+            <td>Tên SP</td>
+            <td>Ảnh SP</td>
+            <td>Số lượng</td>
+            <td>Đơn giá</td>
+            <td>Thành tiền</td>
+            <td></td>
+        </tr>
+    </thead>
+    <tbody>
+
+        @foreach (var item in Cart)
+        {
+            <tr>
+                <td>@item.Product.ID</td>
+                <td>@item.Product.Name</td>
+                <td><img width="100px" src="@item.Product.Image" alt="" /></td>
+                <td><input type="text" class="txtquantity" data-id="@item.Product.ID" value="@item.Quantyli" /></td>
+                <td>@item.Product.Price.GetValueOrDefault(0).ToString("N0")</td>
+                <td>@((item.Product.Price.GetValueOrDefault(0) * item.Quantyli).ToString("N0"))</td>
+                <td><a href="#" data-id="@item.Product.ID" class="btn-delete">Xóa</a></td>
+            </tr>
+
+
+        }
+
+
+
+    </tbody>
+</table>
+<div class="selection group">
+    @using (Html.BeginForm("Payment", "Cart", FormMethod.Post))
+    {
+        <div class="col-md-12">
+            <div class="form-group">
+                <label>Người nhận</label>
+                <input name="shipName" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label>Điện thoại</label>
+                <input name="mobile" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label>Địa chỉ</label>
+                <input name="address" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label>Email</label>
+                <input name="email" class="form-control" />
+            </div>
+            <button type="submit" class="btn">Gửi đơn hàng</button>
+        </div>
+       
+    }
+</div>
+
+

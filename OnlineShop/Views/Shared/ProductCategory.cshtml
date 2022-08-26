@@ -1,0 +1,24 @@
+﻿
+@model List<Model.EF.ProductCategory>
+<style>
+   
+
+        .Categories img {
+            width: 100%;
+          
+        }
+     
+   
+</style>
+<div class="Categories">
+
+
+    @foreach (var item in Model)
+    {
+        <ul class="">
+            <a href="/product/@item.MetaTitle-@item.ID"><img width="100%" src="@item.image" alt="" />
+        </ul>
+    }
+
+
+</div>

@@ -6,7 +6,9 @@
 
 
 }
-
+@section jsFooter{
+    <script src="~/Areas/Admin/js/controller/userControllert.js"></script>
+}
 <h2>User</h2>
 <div class="card-body">
     <div class="table-responsive">
@@ -47,7 +49,7 @@
                             <td class="sorting_1">@item.Name</td>
                             <td>@item.UserName</td>
                             <td>@item.Email</td>
-                            <td>@item.Password</td>
+                            <td><a href="#" class="btn-active" data-id="@item.ID">@(item.Status == false ? "Activated" : "Lock up")</a></td>
                             <td>
                                 <a href="/Admin/User/Edit/@item.ID">Sửa</a>
                             </td>

@@ -1,0 +1,42 @@
+﻿@model  PagedList.IPagedList<Model.EF.Product>
+@using PagedList.Mvc;
+@{
+    ViewBag.Title = "ShowAll";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+
+</style>
+<link href="~/Content/Site.css" rel="stylesheet" />
+<div class="hihi">
+    <div class="content">
+        @{Html.RenderAction("ProductCategory", "Product");}
+    </div>
+</div>
+<div class="product-list" style="padding:30px">
+    
+    @foreach (var item in Model)
+    {
+
+        var url = "/chi-tiet/" + item.MetaTitle + "-" + item.ID;
+        <div class="products">
+
+            <a href="@url">
+                <img width="200" src="@item.Image" alt="" />
+                </a>
+                <div class="detail-products">
+                    <h4>  @item.Name</h4>
+
+                    <div class="card">
+                        <button>Mua Ngay</button>
+                        <button><a href="/them-gio-hang?productId=@item.ID&quantyli=1">Thêm vào giỏ</a></button>
+                    </div>
+                </div>
+        </div>
+
+    }
+</div>
+<div >
+    @Html.PagedListPager(Model, page => Url.Action("ShowAll", new { page, @searchString = ViewBag.@SearchString  } ))
+</div>
+

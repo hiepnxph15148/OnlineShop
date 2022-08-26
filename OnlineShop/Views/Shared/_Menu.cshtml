@@ -1,0 +1,43 @@
+﻿
+<link href="~/Content/Site.css" rel="stylesheet" />
+<div class="navbar navbar-inverse navbar-fixed-top">
+
+    <div class="container">
+        <div class="navbar-header bg-light text-dark">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a style="margin:0 auto" class="navbar-brand" href="/"><img style="margin-top:-10px" width="200px" src="https://theme.hstatic.net/1000306633/1000891824/14/logo_menu_no_scroll.png?v=99" alt="" /></a>
+        </div>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li><a href="/">Home</a></li>
+                <li><a href="/Home/About">About</a></li>
+                <li><a href="/Contact">Contact</a></li>
+            </ul>
+
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="/Admin/Login" id="registerLink">Login</a></li>
+                <li><a href="User/Register" id="loginLink">Register</a></li>
+                <li><a href="/Account/Login" id="loginLink"><i style="color:white; font-size:16px" class="fa fa-cart-shopping-fast"></i></a></li>
+                @{
+                    var session = (UserLogin)Session[OnlineShop.Commom.CommomConstants.USER_SESSION];
+                }
+                @if (session == null)
+                {
+
+                }
+                else
+                {
+                    <li><a href="#">Hello:@session.UserName</a></li>
+                    <li>@Html.ActionLink("Logout", "Logout", "User")</li>
+
+                }
+            </ul>
+
+
+        </div>
+    </div>
+</div>
