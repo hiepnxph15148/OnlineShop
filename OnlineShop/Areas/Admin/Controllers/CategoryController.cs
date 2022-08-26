@@ -14,7 +14,7 @@ namespace OnlineShop.Areas.Admin.Controllers
         
         public ActionResult Index(string searchString, int page = 1, int pageSize = 3)
         {
-            var dao = new UserDao();
+            var dao = new CategoryDao();
             var model = dao.ListAllPagingcate(searchString, page, pageSize);
             ViewBag.SearchString = searchString;
             return View(model);
@@ -30,7 +30,7 @@ namespace OnlineShop.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                var dao = new UserDao();
+                var dao = new CategoryDao();
  
                 long id = dao.Insert(category);
                 if (id > 0)
@@ -48,7 +48,7 @@ namespace OnlineShop.Areas.Admin.Controllers
         }
         public ActionResult Edit(int id)
         {
-            var category = new UserDao().ViewDetailcate(id);
+            var category = new CategoryDao().ViewDetailcate(id);
             return View(category);
         }
         [HttpPost]
@@ -56,7 +56,7 @@ namespace OnlineShop.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                var dao = new UserDao();
+                var dao = new CategoryDao();
                 bool result = dao.Updatecate(category);
                 if (result)
                 {
@@ -74,7 +74,7 @@ namespace OnlineShop.Areas.Admin.Controllers
         [HttpDelete]
         public ActionResult Delete(int id)
         {
-            new UserDao().Deletecate(id);
+            new CategoryDao().Deletecate(id);
             return RedirectToAction("Category");
         }
     }

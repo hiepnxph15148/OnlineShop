@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity.Spatial;
+using System.Web.Mvc;
+
 namespace Model.EF
 {
 
@@ -23,9 +25,10 @@ namespace Model.EF
         [StringLength(250)]
         public string Image { get; set; }
 
-        public long? CategoryID { get; set; }
+        public string CategoryID { get; set; }
 
         [Column(TypeName = "ntext")]
+        [AllowHtml]
         public string Detail { get; set; }
 
         public int? Warranty { get; set; }

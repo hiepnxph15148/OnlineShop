@@ -44,5 +44,6 @@ namespace Model.EF
 
         [StringLength(10)]
         public string ShowOnHome { get; set; }
+       
     }
 }

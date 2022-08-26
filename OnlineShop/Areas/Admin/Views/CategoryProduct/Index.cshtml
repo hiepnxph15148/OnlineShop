@@ -1,0 +1,89 @@
+﻿@*@model  List<Model.EF.Category>*@
+@model  PagedList.IPagedList<Model.EF.ProductCategory>
+@using PagedList.Mvc;
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+
+
+}
+
+<h2>Category</h2>
+<div class="card-body">
+    <div class="table-responsive">
+        <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
+            <div class="row">
+                <div class="col-sm-12 col-md-6">
+                    <div class="dataTables_length" id="dataTable_length">
+                        <label>
+                            Show <select name="dataTable_length" aria-controls="dataTable" class="custom-select custom-select-sm form-control form-control-sm">
+                                <option value="10">10</option>
+                                <option value="25">25</option>
+                                <option value="50">50</option>
+                                <option value="100">100</option>
+                            </select> entries
+                        </label>
+                    </div>
+                </div><div class="col-sm-12 col-md-6">
+                    @using (Html.BeginForm("Index", "CategoryProduct", FormMethod.Get))
+                    {
+
+                        <div class="row" id="dataTable_filter">
+                            <div class="col-md-4 dataTables_filter">
+                                <label>Search</label>
+                                <input type="text" name="searchString" value="@ViewBag.SearchString" class="form-control form-control-sm" />
+                            </div>
+                            <div class="col-md-4" style="margin-top: 32px;">
+
+                                <button class="form-control form-control-sm" type="submit">Tìm kiếm</button>
+                            </div>
+                        </div>
+                    }
+
+                </div>
+            </div><div class="row">
+                <div class="col-sm-12">
+                    <table class="table table-bordered dataTable" id="dataTable" width="100%" cellspacing="0" role="grid" aria-describedby="dataTable_info" style="width: 100%;">
+                        <thead>
+                            <tr role="row">
+                                <th class="sorting sorting_asc" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="width: 186px;">Name</th>
+                                <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 284px;">MetaTitle</th>
+                                <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Office: activate to sort column ascending" style="width: 134px;">DisPlayOrder</th>
+                                <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Age: activate to sort column ascending" style="width: 62px;">Creatdate</th>
+                                <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending" style="width: 127px;">Edit</th>
+                                <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending" style="width: 114px;">Remove</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            @foreach (var item in Model)
+                            {
+                                <tr class="odd" id="row_@item.ID">
+                                    <td class="sorting_1">@item.Name</td>
+                                    <td>@item.MetaTitle</td>
+                                    <td>@item.DisPlayOrder</td>
+                                    <td>@item.CreatedDate</td>
+                                    <td>
+                                        <a href="/Admin/CategoryProduct/Edit/@item.ID">Sửa</a>
+                                    </td>
+                                    <td>
+                                        @Ajax.ActionLink("Xóa", "Delete", new { @id = item.ID }, new AjaxOptions
+                                   {
+                                       Confirm = "Bạn có muốn xóa không ?",
+                                       OnComplete = "$('$(#row_" + item.ID + "').remove()",
+                                       HttpMethod = "Delete"
+                                   })
+                                    </td>
+                                </tr>
+                            }
+
+
+
+                        </tbody>
+                    </table>
+                    @Html.PagedListPager(Model, page => Url.Action("Index", new { page, @searchString = ViewBag.@SearchString }))
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

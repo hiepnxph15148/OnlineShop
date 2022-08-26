@@ -1,11 +1,11 @@
-﻿@model  PagedList.IPagedList<Model.EF.Content>
+﻿@model  PagedList.IPagedList<Model.EF.Product>
 @using PagedList.Mvc;
 @{
     ViewBag.Title = "Index";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Content</h2>
+<h2>Product</h2>
 <div class="card-body">
     <div class="table-responsive">
         <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
@@ -22,7 +22,7 @@
                         </label>
                     </div>
                 </div><div class="col-sm-12 col-md-6">
-                    @using (Html.BeginForm("Index", "Content", FormMethod.Get))
+                    @using (Html.BeginForm("Index", "Product", FormMethod.Get))
                     {
 
                         <div class="row" id="dataTable_filter">
@@ -44,9 +44,9 @@
                               <thead>
                                   <tr role="row">
                                       <th class="sorting sorting_asc" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="width: 186px;">Name</th>
-                                      <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 284px;">UserName</th>
-                                      <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Office: activate to sort column ascending" style="width: 134px;">Email</th>
-                                      <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Age: activate to sort column ascending" style="width: 62px;">Password</th>
+                                      <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 284px;">Image</th>
+                                      <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Office: activate to sort column ascending" style="width: 134px;">Price</th>
+                                      <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Age: activate to sort column ascending" style="width: 62px;">MetaTitle</th>
                                       <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending" style="width: 127px;">Edit</th>
                                       <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending" style="width: 114px;">Remove</th>
                                   </tr>
@@ -58,10 +58,10 @@
                                           <tr class="odd" id="row_@item.ID">
                                               <td class="sorting_1">@item.Name</td>
                                               <td><img width="200" src="@item.Image" alt="" /></td>
-                                              <td>@item.Detail</td>
+                                              <td>@item.Price</td>
                                               <td>@item.MetaTitle</td>
                                               <td>
-                                                  <a href="/Admin/Content/Edit/@item.ID">Sửa</a>
+                                                  <a href="/Admin/Product/Edit/@item.ID">Sửa</a>
                                               </td>
                                               <td>
                                                   @Ajax.ActionLink("Xóa", "Delete", new { @id = item.ID }, new AjaxOptions

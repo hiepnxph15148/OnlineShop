@@ -1,0 +1,16 @@
+﻿.menu1{
+    margin-right: 400px;
+}
+.menu1 li a{
+    margin-right:30px
+}
+.menu1 li a{
+    color:black;
+}
+.navbar-inverse {
+    background-color: white !important;
+    border-color: white !important;
+}
+.navbar-inverse .navbar-nav > li > a {
+  color: black;
+}

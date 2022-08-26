@@ -21,6 +21,15 @@ namespace OnlineShop.Areas.Admin.Controllers
             return View(model);
         }
         [HttpGet]
+        public JsonResult ChangeStatus(int id)
+        {
+            var result = new UserDao().ChangeStatus(id);
+            return Json(new
+            {
+                status = result
+            });
+        }
+        [HttpGet]
         public ActionResult Create()
         {
             return View();
@@ -83,5 +92,6 @@ namespace OnlineShop.Areas.Admin.Controllers
             new UserDao().Delete(id);
             return RedirectToAction("Index");
         }
+     
     }
 }

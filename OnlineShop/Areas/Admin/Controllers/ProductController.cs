@@ -2,20 +2,20 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Model.EF;
 using System.Web;
 using System.Web.Mvc;
+using Model.EF;
 
 namespace OnlineShop.Areas.Admin.Controllers
 {
-    public class ContentController : Controller
+    public class ProductController : Controller
     {
-        // GET: Admin/Content
+        // GET: Admin/Product
         public ActionResult Index(string searchString, int page = 1, int pageSize = 3)
-        
+
         {
-            var dao = new ContentDao();
-            var model = dao.ListAllPagingContent(searchString, page, pageSize);
+            var dao = new ProductDao();
+            var model = dao.ListAllPaging(searchString, page, pageSize);
             ViewBag.SearchString = searchString;
             return View(model);
         }
@@ -27,7 +27,7 @@ namespace OnlineShop.Areas.Admin.Controllers
         }
         public void SetViewBag()
         {
-            var dao = new CategoryDao();
+            var dao = new CategoryProductDao();
             //ViewBag.CategoriID = new SelectList(dao.ListAll(), "ID", "Name", selectedID);
             List<SelectListItem> CList = new List<SelectListItem>();
             foreach (var item in dao.ListAll())
@@ -37,16 +37,16 @@ namespace OnlineShop.Areas.Admin.Controllers
             ViewBag.CategoriID = CList;
         }
         [HttpPost]
-        public ActionResult Create(Content Content)
+        public ActionResult Create(Product product)
         {
             if (ModelState.IsValid)
             {
-                var dao = new ContentDao();
+                var dao = new ProductDao();
 
-                long id = dao.Insert(Content);
+                long id = dao.Insert(product);
                 if (id > 0)
                 {
-                    return RedirectToAction("Index", "Content");
+                    return RedirectToAction("Index", "Product");
                 }
                 else
                 {
@@ -57,26 +57,24 @@ namespace OnlineShop.Areas.Admin.Controllers
             SetViewBag();
             return View();
 
-            }
-
-
+        }
         public ActionResult Edit(int id)
         {
-            var dao = new ContentDao();
-            var content = dao.GetByID(id);
+            var dao = new ProductDao();
+            var product = dao.GetByID(id);
             SetViewBag();
-            return View(content);
+            return View(product);
         }
         [HttpPost]
-        public ActionResult Edit(Content model)
+        public ActionResult Edit(Product model)
         {
             if (ModelState.IsValid)
             {
-                var dao = new ContentDao();
-                bool result = dao.UpdateContent(model);
+                var dao = new ProductDao();
+                bool result = dao.Update(model);
                 if (result)
                 {
-                    return RedirectToAction("Index", "Content");
+                    return RedirectToAction("Index", "Product");
                 }
                 else
                 {
@@ -91,9 +89,8 @@ namespace OnlineShop.Areas.Admin.Controllers
         [HttpDelete]
         public ActionResult Delete(int id)
         {
-            new ContentDao().DeleteContent(id);
-            return RedirectToAction("Content");
+            new ProductDao().Delete(id);
+            return RedirectToAction("Product");
         }
-
     }
 }

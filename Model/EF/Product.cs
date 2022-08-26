@@ -5,6 +5,7 @@ namespace Model.EF
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
+    using System.Web.Mvc;
 
     [Table("Product")]
     public partial class Product
@@ -40,6 +41,7 @@ namespace Model.EF
         public long? CategoryID { get; set; }
 
         [Column(TypeName = "ntext")]
+        [AllowHtml]
         public string Detail { get; set; }
 
         public int? Warranty { get; set; }
