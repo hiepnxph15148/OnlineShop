@@ -2979,9 +2979,6 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
-    <Content Include="Content\css\styles.css" />
-    <Content Include="Content\js\scripts.js" />
-    <Content Include="Content\Page.css" />
     <Content Include="Content\PagedList.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -3209,14 +3206,8 @@
     <Content Include="Asset\js\pulgins\ckeditor\samples\toolbarconfigurator\font\fontello.woff" />
     <Content Include="Asset\js\pulgins\ckeditor\samples\toolbarconfigurator\lib\codemirror\LICENSE" />
     <Content Include="Areas\Admin\Views\Shared\_Navigation.cshtml" />
-    <Content Include="Areas\Admin\Views\CategoryProduct\Create.cshtml" />
-    <Content Include="Areas\Admin\Views\CategoryProduct\Edit.cshtml" />
-    <Content Include="Areas\Admin\Views\CategoryProduct\Index.cshtml" />
-    <Content Include="Areas\Admin\Views\Product\Create.cshtml" />
-    <Content Include="Areas\Admin\Views\Product\Edit.cshtml" />
-    <Content Include="Areas\Admin\Views\Product\Index.cshtml" />
-    <Content Include="libman.json" />
-    <Content Include="Areas\Admin\Views\Shared\401.cshtml" />
+    <Content Include="Areas\Admin\Views\Error\Error.cshtml" />
+    <Content Include="Areas\Admin\Views\Error\PageNotFound.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -3244,20 +3235,7 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Menu.cshtml" />
-    <Content Include="Views\Shared\_Footer.cshtml" />
-    <Content Include="Views\Shared\Side.cshtml" />
-    <Content Include="Views\Shared\ProductCategory.cshtml" />
-    <Content Include="Views\Product\Category.cshtml" />
-    <Content Include="Views\Product\Detail.cshtml" />
-    <Content Include="Views\Product\ShowAll.cshtml" />
-    <Content Include="Views\Cart\Index.cshtml" />
-    <Content Include="Views\Cart\Payment.cshtml" />
-    <Content Include="Views\Cart\Success.cshtml" />
-    <Content Include="Views\Cart\Error.cshtml" />
-    <Content Include="Views\Contact\Index.cshtml" />
-    <Content Include="Views\User\Register.cshtml" />
-    <Content Include="Views\User\Login.cshtml" />
-    <Content Include="Views\Content\Detail.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Code\" />
@@ -3267,7 +3245,6 @@
     <Folder Include="Asset\js\pulgins\ckfinder\userfiles\files\" />
     <Folder Include="Data\" />
     <Folder Include="obj\Debug\TempPE\" />
-    <Folder Include="Views\CartItem\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
