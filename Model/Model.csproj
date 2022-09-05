@@ -65,14 +65,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Dao\CartDao.cs" />
-    <Compile Include="Dao\CategoryDao.cs" />
-    <Compile Include="Dao\CategoryProductDao.cs" />
-    <Compile Include="Dao\ContactDao.cs" />
-    <Compile Include="Dao\ContentDao.cs" />
-    <Compile Include="Dao\OrderDao.cs" />
-    <Compile Include="Dao\OrderDetailDao.cs" />
-    <Compile Include="Dao\ProductDao.cs" />
     <Compile Include="Dao\UserDao.cs" />
     <Compile Include="EF\About.cs" />
     <Compile Include="EF\Category.cs" />
