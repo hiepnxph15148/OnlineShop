@@ -10,6 +10,7 @@
     //var test = category.Name;
 }
 <body>
+
     <!-- Navigation-->
     <!-- Product section-->
     <section class="py-5">
@@ -17,8 +18,10 @@
             <div class="row gx-4 gx-lg-5 align-items-center">
                 <div class="col-md-6"><img class="card-img-top mb-5 mb-md-0" src="@product.Image" alt="..." /></div>
                 <div class="col-md-6">
+
                     <div class="small mb-1">SKU: @category.Name</div>
                     <h1 class="display-5 fw-bolder">@product.Name</h1>
+                    <h2> @(product.Status == false ? "Còn hàng" : "Hết hàng")</h2>
                     <div class="fs-5 mb-5">
                         <span class="text-decoration-line-through">$40.00</span>
                         <span>@product.Price</span>
@@ -37,8 +40,8 @@
                                     <span style="font-size:14px">S</span>
                                 </label>
 
-                            </div> 
-                            <div data-value="M" class="n-sd swatch-element m"  style="background: pink; padding: 10px; border: 1px solid; border-radius: 10px">
+                            </div>
+                            <div data-value="M" class="n-sd swatch-element m" style="background: pink; padding: 10px; border: 1px solid; border-radius: 10px">
                                 <input class="variant-1" id="swatch-1-m" type="radio" name="option2" value="M" data-vhandle="m">
 
                                 <label for="swatch-1-m">
@@ -46,7 +49,7 @@
                                 </label>
 
                             </div>
-                            <div data-value="L" class="n-sd swatch-element l"  style="background: pink; padding: 10px; border: 1px solid; border-radius: 10px;">
+                            <div data-value="L" class="n-sd swatch-element l" style="background: pink; padding: 10px; border: 1px solid; border-radius: 10px;">
                                 <input class="variant-1" id="swatch-1-l" type="radio" name="option2" value="L" data-vhandle="l">
 
                                 <label for="swatch-1-l">

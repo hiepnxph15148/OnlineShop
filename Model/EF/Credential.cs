@@ -1,9 +1,3 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 namespace Model.EF
 {
     using System;
@@ -11,13 +5,17 @@ namespace Model.EF
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
+
     [Table("Credential")]
-    [Serializable]
-    public class Credential
+    public partial class Credential
     {
         [Key]
-        [StringLength(20)]
+        [Column(Order = 0)]
+        [StringLength(50)]
         public string UserGroupID { get; set; }
+
+        [Key]
+        [Column(Order = 1)]
         [StringLength(50)]
         public string RoleID { get; set; }
     }

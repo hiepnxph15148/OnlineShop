@@ -84,9 +84,10 @@
             {
                 var url = "/chi-tiet-content/" + item.MetaTitle + "-" + item.ID;
                 <div class="products">
-                 <a href="@url"><img src="@item.Image" alt="" /></a>
-
-            </div>
+                    <a href="@url"><img src="@item.Image" alt="" /></a>
+                    <h4>@item.Name</h4>
+                    <p>@item.Description</p>
+                </div>
             }
 
         </div>

@@ -23,7 +23,7 @@
                 <li><a href="User/Register" id="loginLink">Register</a></li>
                 <li><a href="/Account/Login" id="loginLink"><i style="color:white; font-size:16px" class="fa fa-cart-shopping-fast"></i></a></li>
                 @{
-                    var session = (UserLogin)Session[OnlineShop.Commom.CommomConstants.USER_SESSION];
+                    var session = (UserLogin)Session[OnlineShop.Common.CommomConstants.USER_SESSION];
                 }
                 @if (session == null)
                 {

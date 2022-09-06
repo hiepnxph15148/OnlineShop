@@ -16,6 +16,7 @@ namespace Model.EF
         public virtual DbSet<Contact> Contacts { get; set; }
         public virtual DbSet<Content> Contents { get; set; }
         public virtual DbSet<ContentTag> ContentTags { get; set; }
+        public virtual DbSet<Credential> Credentials { get; set; }
         public virtual DbSet<Feedback> Feedbacks { get; set; }
         public virtual DbSet<Footer> Footers { get; set; }
         public virtual DbSet<Menu1> Menu1 { get; set; }
@@ -30,9 +31,7 @@ namespace Model.EF
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<About> Abouts { get; set; }
         public virtual DbSet<Order> Orders { get; set; }
-        public virtual DbSet<UserGroup> UserGroups { get; set; }
-        public virtual DbSet<Role> Roles { get; set; } 
-        public virtual DbSet<Credential> Credentials { get; set; }
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Category>()
@@ -69,6 +68,14 @@ namespace Model.EF
 
             modelBuilder.Entity<ContentTag>()
                 .Property(e => e.TagID)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<Credential>()
+                .Property(e => e.UserGroupID)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<Credential>()
+                .Property(e => e.RoleID)
                 .IsUnicode(false);
 
             modelBuilder.Entity<Footer>()
@@ -156,6 +163,10 @@ namespace Model.EF
                 .IsUnicode(false);
 
             modelBuilder.Entity<User>()
+                .Property(e => e.GroupID)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<User>()
                 .Property(e => e.CreatedBy)
                 .IsUnicode(false);
 
@@ -179,7 +190,5 @@ namespace Model.EF
                 .Property(e => e.ShipMobile)
                 .IsUnicode(false);
         }
-
-      
     }
 }

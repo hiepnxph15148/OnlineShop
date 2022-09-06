@@ -64,71 +64,7 @@ namespace Model.Dao
         {
             return db.Users.Find(id);
         }
-        public List<string> GetListCredential(string userName)
-        {
-            var user = db.Users.Single(x => x.UserName == userName);
-            var data = (from a in db.Credentials
-                        join b in db.UserGroups on a.UserGroupID equals b.ID
-                        join c in db.Roles on a.RoleID equals c.ID
-                        where b.ID == user.GroupID
-                        select new
-                        {
-                            RoleID = a.RoleID,
-                            UserGroupID = a.UserGroupID
-                        }).AsEnumerable().Select(x => new Credential()
-                        {
-                            RoleID = x.RoleID,
-                            UserGroupID = x.UserGroupID
-                        });
-            return data.Select(x => x.RoleID).ToList();
-
-        }
-        public int Login(string userName, string passWord, bool isLoginAdmin = false)
-        {
-            var result = db.Users.SingleOrDefault(x => x.UserName == userName);
-            if (result == null)
-            {
-                return 0;
-            }
-            else
-            {
-                if (isLoginAdmin == true)
-                {
-                    if (result.GroupID == CommonConstantscs.ADMIN_GROUP || result.GroupID == CommonConstantscs.MOD_GROUP)
-                    {
-                        if (result.Status == false)
-                        {
-                            return -1;
-                        }
-                        else
-                        {
-                            if (result.Password == passWord)
-                                return 1;
-                            else
-                                return -2;
-                        }
-                    }
-                    else
-                    {
-                        return -3;
-                    }
-                }
-                else
-                {
-                    if (result.Status == false)
-                    {
-                        return -1;
-                    }
-                    else
-                    {
-                        if (result.Password == passWord)
-                            return 1;
-                        else
-                            return -2;
-                    }
-                }
-            }
-        }
+        
         public int Login(string userName, string passWord)
         {
             var result = db.Users.SingleOrDefault(x => x.UserName == userName);

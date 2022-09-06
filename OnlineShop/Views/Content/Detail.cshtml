@@ -5,6 +5,10 @@
     var content = (Model.EF.Content)ViewBag.ContentDetail;
 }
 
-@content.Detail
+ @*HtmlString msg = new HtmlString("@content.Detail");*@
+<div class="col-row-3">
+    @Html.Raw(HttpUtility.HtmlDecode(@content.Detail))
+</div>
 <h1>@content.Name</h1>
+
 

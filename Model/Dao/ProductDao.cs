@@ -103,6 +103,13 @@ namespace Model.Dao
         {
             return db.Products.Find(id);
         }
+        public bool ChangeStatus(long id)
+        {
+            var product = db.Products.Find(id);
+            product.Status = !product.Status;
+            db.SaveChanges();
+            return (bool)product.Status;
+        }
 
     }
 }

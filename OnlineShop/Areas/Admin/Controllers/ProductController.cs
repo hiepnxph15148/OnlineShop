@@ -92,5 +92,15 @@ namespace OnlineShop.Areas.Admin.Controllers
             new ProductDao().Delete(id);
             return RedirectToAction("Product");
         }
+        [HttpGet]
+        public JsonResult ChangeStatus(int id)
+        {
+            var result = new ProductDao().ChangeStatus(id);
+            return Json(new
+            {
+                status = result
+            });
+        }
+      
     }
 }
