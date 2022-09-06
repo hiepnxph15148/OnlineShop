@@ -60,7 +60,7 @@ namespace OnlineShop.Areas.Admin.Controllers
                 bool result = dao.Updatecate(category);
                 if (result)
                 {
-                    return RedirectToAction("Index", "User");
+                    return RedirectToAction("Index", "Category");
                 }
                 else
                 {

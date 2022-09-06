@@ -52,6 +52,8 @@ namespace Model.Dao
                 var content = db.Contents.Find(entity.ID);
                 content.CategoryID = entity.CategoryID;
                 content.Name = entity.Name;
+                content.Description = entity.Description;
+                content.Detail = entity.Detail;
                 content.Image = entity.Image;
                 content.CreatedDate = DateTime.Now;
                 db.SaveChanges();
