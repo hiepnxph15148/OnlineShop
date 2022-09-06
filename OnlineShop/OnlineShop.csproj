@@ -3208,6 +3208,12 @@
     <Content Include="Areas\Admin\Views\Shared\_Navigation.cshtml" />
     <Content Include="Areas\Admin\Views\Error\Error.cshtml" />
     <Content Include="Areas\Admin\Views\Error\PageNotFound.cshtml" />
+    <Content Include="Areas\Admin\Views\Product\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Product\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Product\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\CategoryProduct\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\CategoryProduct\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\CategoryProduct\Index.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
